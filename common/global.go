@@ -1,25 +1,22 @@
 package common
 
-//Struct API
-// Order struct (Model) ...
-
+// Struct API
 type Message struct {
-	Code    int         `json:"code"`
-	Remark  string      `json:"remark"`
-	OrderID string      `json:"orderID"`
-	Orders  *Orders     `json:"orders,omitempty"`
-	Result  interface{} `json:"result,omitempty"`
+	Code   int         `json:"code"`
+	Remark string      `json:"remark"`
+	Result interface{} `json:"result"`
 }
 
-type Orders struct {
-	OrderID    string         `json:"orderID"`
-	CustomerID string         `json:"customerID"`
-	EmployeeID string         `json:"employeeID"`
-	OrderDate  string         `json:"orderDate"`
-	OrdersDet  []OrdersDetail `json:"ordersDetail"`
+// Start order struct
+type Order struct {
+	OrderID    string        `json:"orderID"`
+	CustomerID string        `json:"customerID,omitempty"`
+	EmployeeID string        `json:"employeeID,omitempty"`
+	OrderDate  string        `json:"orderDate,omitempty"`
+	OrderDet   []OrderDetail `json:"ordersDetail,omitempty"`
 }
 
-type OrdersDetail struct {
+type OrderDetail struct {
 	OrderID     string  `json:"orderID"`
 	ProductID   string  `json:"ProductID"`
 	ProductName string  `json:"ProductName"`
@@ -27,12 +24,10 @@ type OrdersDetail struct {
 	Quantity    int     `json:"Quantity"`
 }
 
-type Result struct {
-	Code   int    `json:"code"`
-	Remark string `json:"remark,omitempty"`
-}
+// End order struct
 
-type Customers struct {
+// Start customer struct
+type Customer struct {
 	CustomerID   string `json:"customerID"`
 	CompanyName  string `json:"companyName,omitempty"`
 	ContactName  string `json:"contactName,omitempty"`
@@ -42,6 +37,46 @@ type Customers struct {
 	Country      string `json:"country,omitempty"`
 	Phone        string `json:"phone,omitempty"`
 	PostalCode   string `json:"postalCode,omitempty"`
+}
+
+// End customer struct
+
+// Start product struct
+type Product struct {
+	ProductID       string         `json:"productID"`
+	ProductName     string         `json:"productName,omitempty"`
+	QuantityPerUnit string         `json:"quantityPerUnit,omitempty"`
+	UnitPrice       string         `json:"unitPrice,omitempty"`
+	UnitsInStock    string         `json:"unitsInStock,omitempty"`
+	UnitsOnOrder    string         `json:"unitsOnOrder,omitempty"`
+	SupplierDet     SupplierDetail `json:"supplierDetail,omitempty"`
+	CategoryDet     CategoryDetail `json:"categoryDetail,omitempty"`
+}
+
+type SupplierDetail struct {
+	SupplierID   string `json:"supplierID"`
+	CompanyName  string `json:"companyName"`
+	ContactName  string `json:"contactName"`
+	ContactTitle string `json:"contactTitle"`
+	Address      struct {
+		Street     string `json:"street"`
+		City       string `json:"city"`
+		PostalCode string `json:"postalCode"`
+		Country    string `json:"country"`
+	} `json:"address"`
+}
+
+type CategoryDetail struct {
+	CategoryID   string `json:"categoryID"`
+	CategoryName string `json:"categoryName"`
+	Description  string `json:"description"`
+}
+
+// End product struct
+
+type Result struct {
+	Code   int    `json:"code"`
+	Remark string `json:"remark,omitempty"`
 }
 
 //End Struct API

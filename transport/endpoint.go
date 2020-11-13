@@ -22,7 +22,7 @@ func invalidRequest() cm.Message {
 
 func OrderEndpoint(svc services.PaymentServices) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		if req, ok := request.(cm.Message); ok {
+		if req, ok := request.(cm.Order); ok {
 			return svc.OrderHandler(ctx, req), nil
 		}
 
@@ -33,8 +33,19 @@ func OrderEndpoint(svc services.PaymentServices) endpoint.Endpoint {
 
 func CustomerEndpoint(svc services.PaymentServices) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		if req, ok := request.(cm.Customers); ok {
+		if req, ok := request.(cm.Customer); ok {
 			return svc.CustomerHandler(ctx, req), nil
+		}
+
+		log.WithField("Error", request).Info("Request in unknown format")
+		return invalidRequest(), nil
+	}
+}
+
+func ProductEndpoint(svc services.PaymentServices) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		if req, ok := request.(cm.Product); ok {
+			return svc.ProductHandler(ctx, req), nil
 		}
 
 		log.WithField("Error", request).Info("Request in unknown format")

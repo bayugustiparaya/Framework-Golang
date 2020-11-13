@@ -10,10 +10,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var db *sql.DB
-var err error
-
-func (PaymentService) OrderHandler(ctx context.Context, req cm.Message) (res cm.Message) {
+func (PaymentService) OrderHandler(ctx context.Context, req cm.Order) (res cm.Message) {
 	defer panicRecovery()
 
 	host := cm.Config.Connection.Host
@@ -24,16 +21,14 @@ func (PaymentService) OrderHandler(ctx context.Context, req cm.Message) (res cm.
 
 	var mySQL = fmt.Sprintf("%v:%v@tcp(%v:%v)/%v", user, pass, host, port, data)
 
-	db, err = sql.Open("mysql", mySQL)
+	db, err := sql.Open("mysql", mySQL)
 
 	if err != nil {
 		panic(err.Error())
 	}
 
-	res.OrderID = req.OrderID
-
-	var order cm.Orders
-	var orderDet cm.OrdersDetail
+	var order cm.Order
+	var orderDet cm.OrderDetail
 
 	sql := `SELECT
 				OrderID,
@@ -70,7 +65,6 @@ func (PaymentService) OrderHandler(ctx context.Context, req cm.Message) (res cm.
 					WHERE order_details.OrderID	= ?`
 
 		orderID := &order.OrderID
-		fmt.Println(*orderID)
 		resultDetail, errDet := db.Query(sqlDetail, *orderID)
 
 		defer resultDetail.Close()
@@ -87,7 +81,7 @@ func (PaymentService) OrderHandler(ctx context.Context, req cm.Message) (res cm.
 				panic(err.Error())
 			}
 
-			order.OrdersDet = append(order.OrdersDet, orderDet)
+			order.OrderDet = append(order.OrderDet, orderDet)
 
 		}
 

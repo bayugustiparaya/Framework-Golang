@@ -7,7 +7,7 @@ import (
 	cm "framework/common"
 )
 
-func (PaymentService) CustomerHandler(ctx context.Context, req cm.Customers) (res cm.Message) {
+func (PaymentService) CustomerHandler(ctx context.Context, req cm.Customer) (res cm.Message) {
 	defer panicRecovery()
 
 	host := cm.Config.Connection.Host
@@ -18,13 +18,13 @@ func (PaymentService) CustomerHandler(ctx context.Context, req cm.Customers) (re
 
 	var mySQL = fmt.Sprintf("%v:%v@tcp(%v:%v)/%v", user, pass, host, port, data)
 
-	db, err = sql.Open("mysql", mySQL)
+	db, err := sql.Open("mysql", mySQL)
 
 	if err != nil {
 		panic(err.Error())
 	}
 
-	var customer cm.Customers
+	var customer cm.Customer
 
 	sql := `SELECT
 				CustomerID,
@@ -62,7 +62,6 @@ func (PaymentService) CustomerHandler(ctx context.Context, req cm.Customers) (re
 		res.Code = 100
 		res.Remark = "Success"
 	}
-	res.OrderID = "0"
 	res.Result = customer
 
 	return

@@ -14,7 +14,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 )
 
-func DecodeRequest(ctx context.Context, r *http.Request) (interface{}, error) {
+func DecodeOrderRequest(ctx context.Context, r *http.Request) (interface{}, error) {
 	var body []byte
 
 	requestDump, err := httputil.DumpRequest(r, true)
@@ -32,7 +32,7 @@ func DecodeRequest(ctx context.Context, r *http.Request) (interface{}, error) {
 		return ex.Error(err, 100).Rem("Unable to read request body"), nil
 	}
 
-	var request cm.Message
+	var request cm.Order
 
 	if err = json.Unmarshal(body, &request); err != nil {
 		return ex.Error(err, 100).Rem("Failed decoding json message"), nil
@@ -58,7 +58,30 @@ func DecodeCustomerRequest(ctx context.Context, r *http.Request) (interface{}, e
 		return ex.Error(err, 100).Rem("Unable to read request body"), nil
 	}
 
-	var request cm.Customers
+	var request cm.Customer
+	if err = json.Unmarshal(body, &request); err != nil {
+		return ex.Error(err, 100).Rem("Failed decoding json message"), nil
+	}
+
+	return request, nil
+}
+
+func DecodeProductRequest(ctx context.Context, r *http.Request) (interface{}, error) {
+	var body []byte
+
+	requestDump, err := httputil.DumpRequest(r, true)
+	if err != nil {
+		log.WithField("error", err).Error("Exception caught")
+	}
+	log.Debug(string(requestDump))
+
+	body, err = ioutil.ReadAll(r.Body)
+	log.WithField("info", string(body[:])).Info("Decode Request Product")
+	if err != nil {
+		return ex.Error(err, 100).Rem("Unable to read request body"), nil
+	}
+
+	var request cm.Product
 	if err = json.Unmarshal(body, &request); err != nil {
 		return ex.Error(err, 100).Rem("Failed decoding json message"), nil
 	}

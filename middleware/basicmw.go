@@ -21,7 +21,7 @@ type BasicMiddlewareStruct struct {
 	services.PaymentServices
 }
 
-func (mw BasicMiddlewareStruct) OrderHandler(ctx context.Context, request cm.Message) cm.Message {
+func (mw BasicMiddlewareStruct) OrderHandler(ctx context.Context, request cm.Order) cm.Message {
 	defer func(begin time.Time) {
 		log.WithField("execTime", float64(time.Since(begin).Nanoseconds())/float64(1e6)).Info("OrderHandler ends")
 	}(time.Now())
@@ -32,7 +32,7 @@ func (mw BasicMiddlewareStruct) OrderHandler(ctx context.Context, request cm.Mes
 
 }
 
-func (mw BasicMiddlewareStruct) CustomerHandler(ctx context.Context, request cm.Customers) cm.Message {
+func (mw BasicMiddlewareStruct) CustomerHandler(ctx context.Context, request cm.Customer) cm.Message {
 	defer func(begin time.Time) {
 		log.WithField("execTime", float64(time.Since(begin).Nanoseconds())/float64(1e6)).Info("CustomerHandler ends")
 	}(time.Now())
@@ -40,4 +40,14 @@ func (mw BasicMiddlewareStruct) CustomerHandler(ctx context.Context, request cm.
 	log.WithField("request", request).Info("CustomerHandler begins")
 
 	return mw.PaymentServices.CustomerHandler(ctx, request)
+}
+
+func (mw BasicMiddlewareStruct) ProductHandler(ctx context.Context, request cm.Product) cm.Message {
+	defer func(begin time.Time) {
+		log.WithField("execTime", float64(time.Since(begin).Nanoseconds())/float64(1e6)).Info("ProductHandler ends")
+	}(time.Now())
+
+	log.WithField("request", request).Info("ProductHandler begins")
+
+	return mw.PaymentServices.ProductHandler(ctx, request)
 }

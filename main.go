@@ -25,13 +25,18 @@ func initHandlers() {
 	fmt.Println(cm.Config.RootURL)
 
 	// orders endpoint
-	http.Handle(fmt.Sprintf("%s/orders", root), httptransport.NewServer(
-		transport.OrderEndpoint(svc), transport.DecodeRequest, transport.EncodeResponse,
+	http.Handle(fmt.Sprintf("%s/order", root), httptransport.NewServer(
+		transport.OrderEndpoint(svc), transport.DecodeOrderRequest, transport.EncodeResponse,
 	))
 
 	// customers endpoint
-	http.Handle(fmt.Sprintf("%s/customers", root), httptransport.NewServer(
+	http.Handle(fmt.Sprintf("%s/customer", root), httptransport.NewServer(
 		transport.CustomerEndpoint(svc), transport.DecodeCustomerRequest, transport.EncodeResponse,
+	))
+
+	// customers endpoint
+	http.Handle(fmt.Sprintf("%s/product", root), httptransport.NewServer(
+		transport.ProductEndpoint(svc), transport.DecodeProductRequest, transport.EncodeResponse,
 	))
 
 }
