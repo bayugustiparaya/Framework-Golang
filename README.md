@@ -20,6 +20,12 @@
     > localhost:8000/api/product
     ```
 
+-   Faspay
+
+    ```bash
+    > localhost:8000/api/faspay
+    ```
+
 ## Request
 
 -   Order
@@ -43,6 +49,18 @@
     ```json
     {
         "productID": "2"
+    }
+    ```
+
+-   Faspay
+
+    ```json
+    {
+        "request": "Pengecekan Status Pembayaran",
+        "trx_id": "111111",
+        "merchant_id": "1111115",
+        "bill_no": "9988776655",
+        "signature": "b03951a6051dfa90894eea48ccb964619e8b3474"
     }
     ```
 
@@ -138,5 +156,23 @@
                 "description": "Sweet and savory sauces, relishes, spreads, and seasonings"
             }
         }
+    }
+    ```
+
+-   Faspay
+
+    ```json
+    {
+        "response": "Pengecekan Status Pembayaran",
+        "trx_id": "111111",
+        "merchant_id": "1111115",
+        "merchant": "Zera Store",
+        "bill_not": "123",
+        "payment_reff": "123",
+        "payment_date": "2020-11-16 07:17:28",
+        "payment_status_code": "2",
+        "payment_status_desc": "Payment Sukses",
+        "response_code": "200",
+        "response_desc": "Sukses ambil data"
     }
     ```

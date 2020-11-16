@@ -74,6 +74,32 @@ type CategoryDetail struct {
 
 // End product struct
 
+// Start faspay struct
+
+type RequestFaspay struct {
+	Request       string `json:"request"`
+	TransactionID string `json:"trx_id"`
+	MerchantID    string `json:"merchant_id"`
+	BillNumber    string `json:"bill_no"`
+	Signature     string `json:"signature"`
+}
+
+type ResponseFaspay struct {
+	Response          string `json:"response"`
+	TransactionID     string `json:"trx_id"`
+	MerchantID        string `json:"merchant_id"`
+	Merchant          string `json:"merchant"`
+	BillNumber        string `json:"bill_not"`
+	PaymentReff       string `json:"payment_reff"`
+	PaymentDate       string `json:"payment_date"`
+	PaymentStatusCode string `json:"payment_status_code"`
+	PaymentStatusDesc string `json:"payment_status_desc"`
+	ResponseCode      string `json:"response_code"`
+	ResponseDesc      string `json:"response_desc"`
+}
+
+// End faspay struct
+
 type Result struct {
 	Code   int    `json:"code"`
 	Remark string `json:"remark,omitempty"`

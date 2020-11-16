@@ -13,6 +13,7 @@ type PaymentServices interface {
 	OrderHandler(context.Context, cm.Order) cm.Message
 	CustomerHandler(context.Context, cm.Customer) cm.Message
 	ProductHandler(context.Context, cm.Product) cm.Message
+	FaspayHandler(context.Context, cm.RequestFaspay) cm.ResponseFaspay
 }
 
 type PaymentService struct{}

@@ -52,3 +52,14 @@ func ProductEndpoint(svc services.PaymentServices) endpoint.Endpoint {
 		return invalidRequest(), nil
 	}
 }
+
+func FaspayEndpoint(svc services.PaymentServices) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		if req, ok := request.(cm.RequestFaspay); ok {
+			return svc.FaspayHandler(ctx, req), nil
+		}
+
+		log.WithField("Error", request).Info("Request in unknown format")
+		return invalidRequest(), nil
+	}
+}

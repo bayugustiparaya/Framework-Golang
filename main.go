@@ -39,6 +39,10 @@ func initHandlers() {
 		transport.ProductEndpoint(svc), transport.DecodeProductRequest, transport.EncodeResponse,
 	))
 
+	// faspay endpoint
+	http.Handle(fmt.Sprintf("%s/faspay", root), httptransport.NewServer(
+		transport.FaspayEndpoint(svc), transport.DecodeFaspayRequest, transport.EncodeResponse,
+	))
 }
 
 var logger *log.Entry
