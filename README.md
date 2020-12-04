@@ -26,6 +26,12 @@
     > localhost:8000/api/faspay
     ```
 
+-   Trip
+
+    ```bash
+    > localhost:8000/api/trip
+    ```
+
 ## Request
 
 -   Order
