@@ -64,6 +64,16 @@
     }
     ```
 
+-   Trip
+
+    ```json
+    {
+        "depature_date_1": "2020-10-10",
+        "depature_date_2": "2020-10-13",
+        "provinsi": 31
+    }
+    ```
+
 ## Response
 
 -   Order
@@ -174,5 +184,49 @@
         "payment_status_desc": "Payment Sukses",
         "response_code": "200",
         "response_desc": "Sukses ambil data"
+    }
+    ```
+
+-   Trip
+    ```json
+    {
+        "status": "200",
+        "message": "Success",
+        "data": [
+            {
+                "TripID": "288",
+                "TravelID": "3",
+                "TravelName": "PT. Baitullah Barakah Abadi",
+                "Description": "Amazing Turkey",
+                "Rating": "4.3",
+                "Provinsi": "DKI Jakarta",
+                "CityName": "Kota Jakarta Barat",
+                "LicenseNumber": "748/2017",
+                "DepartureDate": "11/02/2020",
+                "ReturnDate": "19/04/2020",
+                "Duration": "9",
+                "OriginCity": "Kota Tangerang",
+                "AirportName": "Bandar Udara Internasional Soekarno-Hatta",
+                "Origin": "CGK",
+                "Destination": "IST",
+                "Transit": "No",
+                "DetailTransit": "",
+                "HotelName": "Tryp By Wyndham Istanbul Sancaktepe",
+                "HotelRating": "",
+                "Currency": "IDR",
+                "Price": "19500000",
+                "PromoCode": "",
+                "PromoDescription": "",
+                "AirlineName": "Turkish Airlines",
+                "Goods": "",
+                "TermCondition": "",
+                "Lat": "",
+                "Long": "",
+                "DoubleType": "19500000",
+                "TripleType": "0",
+                "QuadType": "0",
+                "Logo": "https://www.moslemtrip.com/traveladmin/apps/photo/3.png"
+            }
+        ]
     }
     ```

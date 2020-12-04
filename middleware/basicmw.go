@@ -61,3 +61,13 @@ func (mw BasicMiddlewareStruct) FaspayHandler(ctx context.Context, request cm.Re
 
 	return mw.PaymentServices.FaspayHandler(ctx, request)
 }
+
+func (mw BasicMiddlewareStruct) TripHandler(ctx context.Context, request cm.RequestTrip) cm.ResponseTrip {
+	defer func(begin time.Time) {
+		log.WithField("execTime", float64(time.Since(begin).Nanoseconds())/float64(1e6)).Info("TripHandler ends")
+	}(time.Now())
+
+	log.WithField("request", request).Info("TripHandler begins")
+
+	return mw.PaymentServices.TripHandler(ctx, request)
+}

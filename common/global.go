@@ -100,6 +100,54 @@ type ResponseFaspay struct {
 
 // End faspay struct
 
+// Start trip struct
+type RequestTrip struct {
+	DepartureDate1 string `json:"depature_date_1"`
+	DepartureDate2 string `json:"depature_date_2"`
+	Provinsi       int    `json:"provinsi"`
+}
+
+type ResponseTrip struct {
+	Status  string `json:"status"`
+	Message string `json:"message"`
+	Data    []struct {
+		TripID           string `json:"TripID"`
+		TravelID         string `json:"TravelID"`
+		TravelName       string `json:"TravelName"`
+		Description      string `json:"Description"`
+		Rating           string `json:"Rating"`
+		Provinsi         string `json:"Provinsi"`
+		CityName         string `json:"CityName"`
+		LicenseNumber    string `json:"LicenseNumber"`
+		DepartureDate    string `json:"DepartureDate"`
+		ReturnDate       string `json:"ReturnDate"`
+		Duration         string `json:"Duration"`
+		OriginCity       string `json:"OriginCity"`
+		AirportName      string `json:"AirportName"`
+		Origin           string `json:"Origin"`
+		Destination      string `json:"Destination"`
+		Transit          string `json:"Transit"`
+		DetailTransit    string `json:"DetailTransit"`
+		HotelName        string `json:"HotelName"`
+		HotelRating      string `json:"HotelRating"`
+		Currency         string `json:"Currency"`
+		Price            string `json:"Price"`
+		PromoCode        string `json:"PromoCode"`
+		PromoDescription string `json:"PromoDescription"`
+		AirlineName      string `json:"AirlineName"`
+		Goods            string `json:"Goods"`
+		TermCondition    string `json:"TermCondition"`
+		Lat              string `json:"Lat"`
+		Long             string `json:"Long"`
+		DoubleType       string `json:"DoubleType"`
+		TripleType       string `json:"TripleType"`
+		QuadType         string `json:"QuadType"`
+		Logo             string `json:"Logo"`
+	} `json:"data"`
+}
+
+// End trip struct
+
 type Result struct {
 	Code   int    `json:"code"`
 	Remark string `json:"remark,omitempty"`
